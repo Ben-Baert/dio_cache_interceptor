@@ -68,7 +68,11 @@ class CacheResponse {
   Response toResponse(RequestOptions options, {bool fromNetwork = false}) {
     return Response(
       data: deserializeContent(options.responseType, content),
-      extra: {cacheKey: key, CacheResponse.fromNetwork: fromNetwork},
+      extra: {
+        cacheKey: key,
+        CacheResponse.fromNetwork: fromNetwork,
+        'isExpired': isExpired(),
+      },
       headers: getHeaders(),
       statusCode: 304,
       requestOptions: options,
