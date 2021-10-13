@@ -58,6 +58,9 @@ class DioCacheInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
+    response.headers.add(
+        expiresHeader, DateTime.now().add(Duration(days: 1)).toIso8601String());
+
     final options = _getCacheOptions(response.requestOptions);
 
     if (_shouldSkipRequest(response.requestOptions, options: options) ||
@@ -67,9 +70,6 @@ class DioCacheInterceptor extends Interceptor {
     }
 
     final policy = options.policy;
-
-    response.headers.add(expiresHeader,
-        DateTime.now().add(Duration(minutes: 1)).toIso8601String());
 
     if (policy == CachePolicy.noCache) {
       // Delete previous potential cached response
