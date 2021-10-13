@@ -159,6 +159,7 @@ class DioCacheInterceptor extends Interceptor {
 
     var result = response.headers[etagHeader] != null;
     result |= response.headers[lastModifiedHeader] != null;
+    result |= response.headers[expiresHeader] != null;
 
     final cacheControl = CacheControl.fromHeader(
       response.headers[cacheControlHeader],
