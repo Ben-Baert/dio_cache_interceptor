@@ -68,6 +68,9 @@ class DioCacheInterceptor extends Interceptor {
 
     final policy = options.policy;
 
+    response.headers.add(expiresHeader,
+        DateTime.now().add(Duration(minutes: 1)).toIso8601String());
+
     if (policy == CachePolicy.noCache) {
       // Delete previous potential cached response
       await _getCacheStore(options).delete(
