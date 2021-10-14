@@ -120,6 +120,10 @@ class CacheResponse {
     }
 
     final checkedExpires = expires;
+    print('Response expires: $checkedExpires');
+    print('Response checkedDate: $checkedDate');
+    print(
+        'checkedExpires.difference(checkedDate).isNegative: ${checkedExpires?.difference(checkedDate).isNegative}');
     if (checkedExpires != null) {
       return checkedExpires.difference(checkedDate).isNegative;
     }
