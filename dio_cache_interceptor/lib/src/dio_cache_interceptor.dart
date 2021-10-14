@@ -59,8 +59,14 @@ class DioCacheInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    response.headers.add(expiresHeader,
-        io.HttpDate.format(DateTime.now().add(Duration(days: 1))));
+    response.headers.add(
+      expiresHeader,
+      io.HttpDate.format(
+        DateTime.now().add(
+          Duration(minutes: 1),
+        ),
+      ),
+    );
 
     final options = _getCacheOptions(response.requestOptions);
 
