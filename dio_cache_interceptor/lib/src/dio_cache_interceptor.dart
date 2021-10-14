@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io' as io;
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/src/model/cache_control.dart';
@@ -58,8 +59,8 @@ class DioCacheInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    response.headers.add(
-        expiresHeader, DateTime.now().add(Duration(days: 1)).toIso8601String());
+    response.headers.add(expiresHeader,
+        io.HttpDate.format(DateTime.now().add(Duration(days: 1))));
 
     final options = _getCacheOptions(response.requestOptions);
 
